@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<style>
+    body {
+        margin-top: 0px;
+        margin-left: 0px;
+    }
+    
+    .AmberMain {
+        width: 224px;
+        height: 386px;
+        background: orange;
+        margin: 0px;
+    }
+    
+    .Image {
+        padding-left: 11px;
+        padding-top: 5px;
+        max-width: 180px;
+    }
+    
+    .Politie {
+        color: #000061;
+        background: rgb(255, 255, 255);
+        align-content: center;
+        text-align: center;
+        font-family: arial;
+        font-size: 20px;
+        padding: 5px;
+    }
+    
+    .politie_logo {
+        height: 20px;
+        padding-right: 10px;
+    }
+    
+    .Amberfeed {
+        text-align: center;
+        font-family: arial;
+        margin-left: 21px;
+        margin-top: -5px;
+        background: white;
+        width: 180px;
+        max-width: 180px;
+        min-width: 180px;
+        min-height: 118px;
+        max-height: 118px;
+        padding-left: 1px;
+    }
+    
+    .amber_logo {
+        height: 45px;
+        margin-top: -20px;
+        padding-left: 110x;
+    }
+    
+    .zoek {
+        background-image: url("veenendaal.jpg");
+        height: 386px;
+        width: 224px;
+    }
+</style>
+
+<body>
+    <div class="AmberMain" id="AmberMain">
+        <div class="Image"><img class="Image" id="image" alt="image" /></div>
+
+        <div class="Amberfeed">
+            <img class="amber_logo" src="AMBER_Alert_standalone_logo.png" />
+            <p class="title" id="title"></p>
+            <p></p>
+            <p class="desc" id="description"></p>
+        </div>
+        <div class="Politie">
+            <img class="politie_logo" src="/politie-logo.png" />Bel 0800-6070
+        </div>
+    </div>
+
+    <script>
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                myFunction(this);
+            }
+        };
+        xhttp.open("GET", "demo.xml", true);
+        xhttp.send();
+
+        function myFunction(xml) {
+
+            var xmlDoc = xml.responseXML;
+            document.getElementById("image").src = xmlDoc.getElementsByTagName("NP:Image")[0].childNodes[0].nodeValue;
+            var xmlDoc = xml.responseXML;
+            document.getElementById("title").innerHTML = xmlDoc.getElementsByTagName("NP:Title")[0].childNodes[0].nodeValue;
+            var xmlDoc = xml.responseXML;
+            document.getElementById("description").innerHTML = xmlDoc.getElementsByTagName("NP:Message")[0].getAttribute("NP:Description");
+
+
+        }
+    </script>
+</body>
+
+</html>
